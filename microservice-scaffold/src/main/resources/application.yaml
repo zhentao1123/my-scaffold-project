@@ -1,0 +1,45 @@
+
+#server
+server: 
+  port: 8080
+  session-timeout: 1000000
+  context-path: /microservice
+  #address: 192.168.1.2
+  error:
+    path: /error
+  compression:
+    enabled: true
+  #display-name: application
+  tomcat:
+    uri-encoding: UTF-8
+    compression: on
+    max-threads: 800  # tomcat最大线程数，默认为200   
+    basedir: /logs/microservice  # 存放Tomcat的日志、Dump等文件的临时文件夹，默认为系统的tmp文件夹
+    access-log-enabled: true # 打开Tomcat的Access日志，并可以设置日志格式的方法：
+    #access-log-pattern:  
+    #accesslog:
+      #directory:  # accesslog目录，默认在basedir/logs  
+    #basedir: #设定Tomcat的base 目录，如果没有指定则使用临时目录.
+    #uri-encoding: #设定URI的解码字符集
+
+#logging      
+logging:
+  path: /logs/microservice
+  file: microservice.log # 日志文件名称，默认为spring.log  
+
+#spring
+spring:
+  profiles:
+    active: dev
+  mvc:
+    async:
+      request-timeout: 30 
+    date-format: yyyy-MM-dd HH:mm:ss
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    
+#management
+management:  
+  port: 8081
