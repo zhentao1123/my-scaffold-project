@@ -1,9 +1,10 @@
+app-name: microservice
 
 #server
 server: 
   port: 8080
   session-timeout: 1000000
-  context-path: /microservice
+  context-path: /${app-name}
   #address: 192.168.1.2
   error:
     path: /error
@@ -14,7 +15,7 @@ server:
     uri-encoding: UTF-8
     compression: on
     max-threads: 800  # tomcat最大线程数，默认为200   
-    basedir: /logs/microservice  # 存放Tomcat的日志、Dump等文件的临时文件夹，默认为系统的tmp文件夹
+    basedir: /logs/${app-name}  # 存放Tomcat的日志、Dump等文件的临时文件夹，默认为系统的tmp文件夹
     access-log-enabled: true # 打开Tomcat的Access日志，并可以设置日志格式的方法：
     #access-log-pattern:  
     #accesslog:
@@ -24,8 +25,8 @@ server:
 
 #logging      
 logging:
-  path: /logs/microservice
-  file: microservice.log # 日志文件名称，默认为spring.log  
+  path: /logs/${app-name}
+  file: ${app-name}.log # 日志文件名称，默认为spring.log  
 
 #spring
 spring:
@@ -40,6 +41,10 @@ spring:
     joda-date-time-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     
+    
+ #swagger
+springfox.documentation.swagger.v2.path: /${app-name} #指定swagger-ui.html页面上的doc目录，默认是/v2/api-docs,不设置也没什么影响
+ 
 #management
 management:  
   port: 8081
