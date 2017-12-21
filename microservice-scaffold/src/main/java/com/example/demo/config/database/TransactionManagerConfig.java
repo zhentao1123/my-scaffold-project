@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -50,6 +51,12 @@ public class TransactionManagerConfig {
 		factory.afterPropertiesSet(); //在完成了其它所有相关的配置加载以及属性设置后,才初始化
 		return factory.getObject();
 	}
+	
+	// --JdbcTemplate--
+    @Bean(name = "jdbcTemplate")
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource);
+    }
 
 	// -- DataSource --
 }

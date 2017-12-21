@@ -1,10 +1,10 @@
 package com.example.demo.dao.impl;
 
-import org.springframework.data.annotation.Persistent;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.dao.UserDao;
 
-@Persistent
+@Repository
 public class UserDaoImpl extends BaseDao implements UserDao {
 
 }

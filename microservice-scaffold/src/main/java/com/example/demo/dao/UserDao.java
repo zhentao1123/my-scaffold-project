@@ -1,8 +1,8 @@
 package com.example.demo.dao;
 
-import org.springframework.data.annotation.Persistent;
+import org.springframework.stereotype.Repository;
 
-@Persistent
+@Repository
 public interface UserDao {
 
 }
