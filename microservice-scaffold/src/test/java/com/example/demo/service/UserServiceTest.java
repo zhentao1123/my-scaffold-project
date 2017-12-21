@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Profiles;
 import com.example.demo.dao.entity.User;
-import com.example.demo.exception.BusinessException;
+import com.example.demo.exception.BizException;
 import com.example.demo.util.mapper.BeanMapper;
 import com.example.demo.web.request.to.UserTO;
 import com.example.demo.web.response.vo.UserVO;
@@ -44,7 +44,7 @@ public class UserServiceTest {
 		try {
 			UserVO userVO = userService.addUser(userTO);
 			System.out.println(userVO.toString());
-		} catch (BusinessException e) {
+		} catch (BizException e) {
 			e.printStackTrace();
 		}
 	}

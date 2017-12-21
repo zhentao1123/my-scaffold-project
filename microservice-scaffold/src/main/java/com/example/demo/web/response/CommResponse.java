@@ -6,13 +6,13 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description="响应模型")
 public class CommResponse<D> {
 	
-	public static final int CODE_SUCCEED = 1;
-	public static final int CODE_FAIL = 0;
+	public static final String CODE_SUCCEED = "1";
+	public static final String CODE_FAIL = "0";
 	public static final String MESSAGE_SUCCEED = "succeed";
 	public static final String MESSAGE_FAIL = "fail";
 	
 	@ApiModelProperty(name="code")
-	private Integer code;
+	private String code;
 	
 	@ApiModelProperty(name="message")
 	private String message;
@@ -20,7 +20,7 @@ public class CommResponse<D> {
 	@ApiModelProperty(name="data")
 	private D data;
 	
-	public CommResponse(Integer code, String message, D data) {
+	public CommResponse(String code, String message, D data) {
 		super();
 		this.code = code;
 		this.message = message;
@@ -37,11 +37,11 @@ public class CommResponse<D> {
 		return instances;
 	}
 
-	public Integer getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(Integer code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
