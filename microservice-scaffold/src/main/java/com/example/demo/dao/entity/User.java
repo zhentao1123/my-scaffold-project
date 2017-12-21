@@ -1,49 +1,40 @@
 package com.example.demo.dao.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.example.demo.util.mapper.BeanMapper;
-import com.example.demo.web.response.vo.UserVO;
 
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
+@Table(name="user")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private Integer id;
 
+	@Column(nullable=false)
 	private Integer age;
 
-	@Temporal(TemporalType.DATE)
-	private Date birthday;
-
-	private String name;
-
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="sys_create_date")
-	private Date sysCreateDate;
+	@Column(name="create_time", nullable=false)
+	private Date createTime;
+
+	@Column(nullable=false, length=20)
+	private String name;
 
 	public User() {
 	}
-	
+
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Integer id) {
@@ -58,12 +49,12 @@ public class User implements Serializable {
 		this.age = age;
 	}
 
-	public Date getBirthday() {
-		return this.birthday;
+	public Date getCreateTime() {
+		return this.createTime;
 	}
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getName() {
@@ -72,14 +63,6 @@ public class User implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Date getSysCreateDate() {
-		return this.sysCreateDate;
-	}
-
-	public void setSysCreateDate(Date sysCreateDate) {
-		this.sysCreateDate = sysCreateDate;
 	}
 
 }
