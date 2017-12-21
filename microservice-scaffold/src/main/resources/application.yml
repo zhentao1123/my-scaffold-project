@@ -25,8 +25,11 @@ server:
 
 #logging      
 logging:
-  path: /logs/${app-name}
-  file: ${app-name}.log # 日志文件名称，默认为spring.log  
+  config: classpath:app-logback.xml
+  #lever:
+  #  org.springframework: info
+  #path: /logs/${app-name}
+  #file: ${app-name}.log # 日志文件名称，默认为spring.log  
 
 #spring
 spring:
