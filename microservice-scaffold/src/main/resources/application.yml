@@ -2,7 +2,7 @@ app-name: microservice-scaffold
 
 #server
 server: 
-  port: 8080
+  port: 8090
   session-timeout: 1000000
   context-path: /${app-name}
   #address: 192.168.1.2
@@ -50,4 +50,4 @@ springfox.documentation.swagger.v2.path: /${app-name} #指定swagger-ui.html页�
  
 #management
 management:  
-  port: 8081
+  port: 8091
