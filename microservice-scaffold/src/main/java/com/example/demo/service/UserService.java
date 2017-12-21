@@ -21,4 +21,5 @@ public interface UserService {
 	
 	public void removeUser(Integer id) throws BizException;
 	
+	public void addTwoUser(UserTO userTO) throws BizException;
 }

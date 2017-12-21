@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.dao.UserDao;
 import com.example.demo.dao.entity.User;
 import com.example.demo.dao.repository.UserRepository;
 import com.example.demo.exception.BizException;
+import com.example.demo.exception.DBException;
 import com.example.demo.service.UserService;
 import com.example.demo.util.mapper.BeanMapper;
 import com.example.demo.web.request.to.UserTO;
@@ -20,6 +22,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	UserDao userDao;
 	
 	@Override
 	public List<UserVO> getUserList() throws BizException {
@@ -60,4 +65,19 @@ public class UserServiceImpl extends BaseService implements UserService {
 		userRepository.delete(id);
 	}
 
+	/**
+	 * 测试统一事务管理jdbcTemplate和spring data
+	 */
+	@Override
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
+	public void addTwoUser(UserTO userTO) throws BizException {
+		User addUser = BeanMapper.map(userTO, User.class);
+		userRepository.save(addUser);
+		try {
+			userDao.jdbcAdd(addUser);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new BizException(e);
+		}
+	}
 }
