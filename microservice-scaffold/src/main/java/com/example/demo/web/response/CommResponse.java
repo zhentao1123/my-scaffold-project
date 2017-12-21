@@ -35,6 +35,11 @@ public class CommResponse<D> {
 		this.message = message;
 	}
 	
+	public static <D> CommResponse<D> getInstances4Succeed(){
+		CommResponse<D> instances = new CommResponse<D>(CODE_SUCCEED, MESSAGE_SUCCEED);
+		return instances;
+	}
+	
 	public static <D> CommResponse<D> getInstances4Succeed(D data){
 		CommResponse<D> instances = new CommResponse<D>(CODE_SUCCEED, MESSAGE_SUCCEED, data);
 		return instances;
