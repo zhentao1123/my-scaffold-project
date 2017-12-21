@@ -26,8 +26,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/v1/user")
-@Api(hidden=false, tags="User接口")
+@RequestMapping("/user/V1/")
+@Api(hidden=false, tags="User接口 V1")
 public class UserController extends BaseController{
 	
 	static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -42,7 +42,7 @@ public class UserController extends BaseController{
 	 */
 	@ApiOperation(value="获取用户列表", notes="")
 	@ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "VoidRequest")
-	@RequestMapping(value="/getUserList", method=RequestMethod.POST)
+	@RequestMapping(value="getUserList", method=RequestMethod.POST)
 	public CommResponse<List<UserVO>> getUserList(VoidRequest request) throws BizException{
 		List<UserVO> list = userService.getUserList();
 		return CommResponse.getInstances4Succeed(list);
@@ -56,7 +56,7 @@ public class UserController extends BaseController{
 	 */
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "AddUserRequest")
-	@RequestMapping(value="/addUser", method=RequestMethod.POST)
+	@RequestMapping(value="addUser", method=RequestMethod.POST)
 	public CommResponse<UserVO> addUser(@RequestBody AddUserRequest request) throws BizException{
 		UserTO userTO = request.getUser();
 		UserVO userVO = userService.addUser(userTO);
@@ -71,7 +71,7 @@ public class UserController extends BaseController{
 	 */
 	@ApiOperation(value="获取用户详细信息", notes="id来获取用户详细信息")
     @ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "GetUserRequest")
-	@RequestMapping(value="/getUser", method=RequestMethod.POST)
+	@RequestMapping(value="getUser", method=RequestMethod.POST)
 	public CommResponse<UserVO> getUser(@RequestBody GetUserRequest request) throws BizException{
 		Integer id = request.getId();
 		UserVO userVO = userService.getUser(id);
@@ -87,7 +87,7 @@ public class UserController extends BaseController{
 	 */
 	@ApiOperation(value="更新用户详细信息", notes="根据user对象来更新用户详细信息")
 	@ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "EditUserRequest")
-	@RequestMapping(value="/editUser", method=RequestMethod.POST)
+	@RequestMapping(value="editUser", method=RequestMethod.POST)
 	public CommResponse<UserVO> editUser(@RequestBody EditUserRequest request) throws BizException{
 		UserTO userTO = request.getUser();
 		UserVO userVO = userService.editUser(userTO);
@@ -102,7 +102,7 @@ public class UserController extends BaseController{
 	 */
 	@ApiOperation(value="删除用户", notes="根据id来指定删除对象")
 	@ApiImplicitParam(name = "request", value = "请求对象", required = true, dataType = "DeleteUserRequest")
-	@RequestMapping(value="/deleteUser", method=RequestMethod.POST)
+	@RequestMapping(value="deleteUser", method=RequestMethod.POST)
 	public CommResponse<Void> deleteUser(@RequestBody DeleteUserRequest request) throws BizException {
 		Integer id = request.getId();
 		userService.removeUser(id);
