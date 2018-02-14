@@ -1,0 +1,6 @@
+datasource:
+    url: jdbc:mysql://10.117.206.21:3306/xgtrip?useSSL=false&autoCommit=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&maxReconnects=2&useCompression=true
+    username: xgdbrw
+    password: H4E-z4s9403TES2eY9-X2c-3fScde
+    driver: com.mysql.jdbc.Driver
+    database: xgtrip

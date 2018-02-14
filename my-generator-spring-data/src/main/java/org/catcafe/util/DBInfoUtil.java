@@ -21,26 +21,27 @@ public class DBInfoUtil {
 	private String url;
 	private String username;
 	private String password;
-	private String db;
+	private String database;
 	
 	private Connection conn = null;
 	
-	public DBInfoUtil(String url, String userName, String password, String db, String driver){
+	public DBInfoUtil(){}
+	
+	public DBInfoUtil(String url, String userName, String password, String database, String driver){
 		this.url = url;
 		this.username = userName;
 		this.password = password;
-		this.db = db;
+		this.database = database;
 		this.driver = driver;
-		
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private Connection openConn() throws SQLException{
 		if(null==conn){
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 			conn = DriverManager.getConnection(url,username,password);
 		}
 		return conn;
@@ -58,7 +59,7 @@ public class DBInfoUtil {
 		Connection conn = openConn();
 		
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("show table status from " + db);
+		ResultSet rs = stmt.executeQuery("show table status from " + database);
 
 		while (rs.next()) {
 			String tableName = rs.getString("Name");
@@ -118,6 +119,48 @@ public class DBInfoUtil {
 		return tableInfo;
 	}
 	
+	public String getDriver() {
+		return driver;
+	}
+
+	public void setDriver(String driver) {
+		this.driver = driver;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(String database) {
+		this.database = database;
+	}
+
+
+
 	public static class TableInfo{
 		//表名
 		private String name;
