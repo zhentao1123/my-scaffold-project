@@ -1,5 +1,6 @@
 package org.catcafe;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.catcafe.util.DBInfoUtil;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import freemarker.template.TemplateException;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTests {
@@ -23,7 +26,7 @@ public class ApplicationTests {
 	DBInfoUtil dbInfoUtil;
 	
 	@Test
-	public void contextLoads() {
+	public void testDBInfoUtil() {
 		try {
 			TableInfo tableInfo = dbInfoUtil.getTableInfo("user");
 			logger.debug(JsonUtil.obj2json(tableInfo));
@@ -32,5 +35,20 @@ public class ApplicationTests {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testSourceGenerator() throws IOException, TemplateException {
+		SourceGenerator sourceGenerator = new SourceGenerator(
+				"src/test/resources/flt/java/",
+				"com.demo",
+				"entity.flt",
+				"entity",
+				"repository.flt",
+				"repository");
+		sourceGenerator.generateEntity("user", true);
+	}
 
+	public static void main(String[] args) {
+		
+	}
 }

@@ -30,7 +30,7 @@ import freemarker.template.TemplateException;
  * SourceMaker 代码生成工具
  *
  */
-public class SourceGenerator implements Base {
+public class SourceGenerator1 implements Base {
     /**
      * 
      */
@@ -86,7 +86,7 @@ public class SourceGenerator implements Base {
      * @throws IOException
      */
     public static void main(String[] arg) throws ClassNotFoundException, IOException {
-        SourceGenerator sourceGenerator= new SourceGenerator();
+        SourceGenerator1 sourceGenerator= new SourceGenerator1();
         boolean overwrite = false;// 是否覆盖已有代码
         String basePackage = "org.publiccms";// 基础包名
         // 生成所有实体类的代码
@@ -250,7 +250,7 @@ public class SourceGenerator implements Base {
      * @throws IOException
      *
      */
-    public SourceGenerator() throws IOException {
+    public SourceGenerator1() throws IOException {
         config = new freemarker.template.Configuration(Configuration.getVersion());
         config.setDirectoryForTemplateLoading(new File("src/test/resources/generator/"));
         config.setDefaultEncoding("utf-8");
