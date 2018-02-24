@@ -56,6 +56,12 @@ public class TimeLimitTask<RESULT> {
         }
 	}
 	
+	/**
+	 * 添加批量任务
+	 * @param key
+	 * @param call
+	 * @throws Exception
+	 */
 	public void addBatchTask(String key, Callable<RESULT> call) throws Exception{
 		if(null == initMultThreadExecutor()){
 			throw new Exception("No ExecutorService");
