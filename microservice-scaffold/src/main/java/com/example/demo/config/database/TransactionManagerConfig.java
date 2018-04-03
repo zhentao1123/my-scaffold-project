@@ -1,5 +1,7 @@
 package com.example.demo.config.database;
 
+import java.util.Properties;
+
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 
@@ -45,12 +47,20 @@ public class TransactionManagerConfig {
 		jpaVendorAdapter.setDatabase(Database.MYSQL);
 		jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
 		jpaVendorAdapter.setShowSql(true);
-		jpaVendorAdapter.setGenerateDdl(true);
+		jpaVendorAdapter.setGenerateDdl(false);
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
-		//factory.setJpaProperties(jpaProperties);
+		factory.setJpaProperties(hibernateProperties()); //似乎和HibernateJpaVendorAdapter有重复，为了保准设置生效暂且都设置
 		factory.afterPropertiesSet(); //在完成了其它所有相关的配置加载以及属性设置后,才初始化
 		return factory.getObject();
 	}
+	
+	private Properties hibernateProperties() {  
+        Properties properties = new Properties();  
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
+        properties.put("hibernate.show.sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "none");
+        return properties;  
+    }  
 	
 	// --JdbcTemplate--
     @Bean(name = "jdbcTemplate")
