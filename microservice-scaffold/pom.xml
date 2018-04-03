@@ -91,6 +91,11 @@
 	        <artifactId>HikariCP</artifactId>  
 	    </dependency>
 	    
+	    <!-- freemarker模板引擎 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 	    
 	    <!-- mysql jdbc -->
 		<dependency>
