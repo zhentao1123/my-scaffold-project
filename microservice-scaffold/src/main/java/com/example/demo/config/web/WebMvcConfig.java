@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
@@ -27,7 +28,19 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		//为swagger-ui设置资源映射
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		super.addResourceHandlers(registry);
 	}
+	
+	@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 多个拦截器组成一个拦截器链
+        // addPathPatterns 用于添加拦截规则
+        // excludePathPatterns 用户排除拦截
+		//registry.addInterceptor(new APIAuthInterceptor())
+		//		.addPathPatterns("/api/**")
+		//		.excludePathPatterns("/api/*/tenant/gettoken"); 
+		super.addInterceptors(registry);
+    }
 	
 	@PostConstruct
     public void init() {
