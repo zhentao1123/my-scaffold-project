@@ -9,6 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import com.google.common.collect.Lists;
+
 /**
  * 校验工具类 结合javax.validation.constraints和org.hibernate.validator.constraints的标签使用
  */
@@ -84,9 +86,9 @@ public class ValidationUtil {
 		public List<String> getErrorMessagesList(){
 			List<String> result = null;
 			if(null!=errorMessages && errorMessages.size()>0) {
-				result = Collections.emptyList();
+				result = Lists.newArrayList();
 				for(ValidationResultItem vri : errorMessages) {
-					result.add(vri.getErrorMessage());
+					result.add(new StringBuilder().append(vri.getPropertyName()).append(" ").append(vri.getErrorMessage()).toString());
 				}
 			}
 			return result;
